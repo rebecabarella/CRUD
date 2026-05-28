@@ -6,6 +6,12 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UseWPF>true</UseWPF>
+        <UserSecretsId>eb29effc-3c7c-4805-a395-c7d01a9a9850</UserSecretsId>
     </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DotNetEnv" Version="3.2.0" />
+      <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.26" />
+    </ItemGroup>
 
 </Project>
