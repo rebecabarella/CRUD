@@ -27,7 +27,7 @@
                                          FontSize="14"/>
                                 
                                 <TextBlock Text="Senha" Foreground="#718093" Margin="0,0,0,5" FontWeight="SemiBold"/>
-                                <TextBox x:Name="TxtSenha" 
+                                <PasswordBox x:Name="TxtSenha" 
                                          Height="35" 
                                          Padding="5,0" 
                                          VerticalContentAlignment="Center" 
