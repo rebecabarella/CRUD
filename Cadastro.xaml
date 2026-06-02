@@ -3,26 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CRUD"
         mc:Ignorable="d"
         Title="Cadastro de Usuário" Height="380" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="20">
         <StackPanel>
-            <Label Content="Nome:" FontWeight="Bold" Margin="0 0 0 2"/>
-            <TextBox x:Name="TxtNome" Height="25" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            
-            <Label Content="Username:" FontWeight="Bold" Margin="0 0 0 2"/>
-            <TextBox x:Name="TxtUsername" Height="25" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            
-            <Label Content="Email:" FontWeight="Bold" Margin="0 0 0 2"/>
-            <TextBox x:Name="TxtEmail" Height="25" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            
-            <Label Content="Senha:" FontWeight="Bold" Margin="0 0 0 2"/>
-            <PasswordBox x:Name="TxtSenha" Height="25" Margin="0 0 0 10" VerticalAlignment="Center"/>
-            
-            <Button Content="Cadastrar" Click="BtnCadastrar_OnClick"/>
+            <Label Content="Nome:" FontWeight="Bold" Margin="0 0 0 2" />
+            <TextBox x:Name="TxtNome" Height="25" Margin="0 0 0 10" VerticalAlignment="Center" />
+
+            <Label Content="Username:" FontWeight="Bold" Margin="0 0 0 2" />
+            <TextBox x:Name="TxtUsername" Height="25" Margin="0 0 0 10" VerticalAlignment="Center" />
+
+            <Label Content="Email:" FontWeight="Bold" Margin="0 0 0 2" />
+            <TextBox x:Name="TxtEmail" Height="25" Margin="0 0 0 10" VerticalAlignment="Center" />
+
+            <Label Content="Senha:" FontWeight="Bold" Margin="0 0 0 2" />
+            <PasswordBox x:Name="TxtSenha" Height="25" Margin="0 0 0 10" VerticalAlignment="Center" />
+
+            <Button Content="Cadastrar" Click="BtnCadastrar_OnClick" />
         </StackPanel>
     </Grid>
 </Window>
-
-

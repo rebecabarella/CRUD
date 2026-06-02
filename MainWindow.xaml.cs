@@ -18,6 +18,7 @@ public partial class MainWindow : Window
             TxtUsuario.Focus();
             return;
         }
+
         if (string.IsNullOrWhiteSpace(TxtSenha.Password))
         {
             MessageBox.Show("Preencha o campo senha!");
@@ -31,7 +32,7 @@ public partial class MainWindow : Window
         using var comando = new MySqlCommand(query, conexao);
         comando.Parameters.AddWithValue("username", TxtUsuario.Text);
         comando.Parameters.AddWithValue("@senha", TxtSenha.Password);
-                
+
         try
         {
             conexao.Open();
@@ -42,15 +43,11 @@ public partial class MainWindow : Window
                 return;
             }
 
-            while (leitor.Read())
-            {
-                MessageBox.Show(leitor.GetString(1));
-            }
+            while (leitor.Read()) MessageBox.Show(leitor.GetString(1));
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
-            return;
         }
     }
 
