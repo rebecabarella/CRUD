@@ -70,7 +70,38 @@ public partial class MeuPerfil : Window
 
     private void BtnDeletar_OnClick(object sender, RoutedEventArgs e)
     {
+        var resultadoMessageBox = MessageBox.Show("Voce tem certeza que deseja excluir o perfil?", "confirmação de exclusão", MessageBoxButton.YesNo, MessageBoxImage.Question);
         
+        if (resultadoMessageBox == MessageBoxResult.No)
+            return;
+        
+        // criar a query
+        var query = "DELETE FROM usuarios WHERE id = @id";
+        //criar conexao
+        using var conexao = new MySqlConnection(App.StringConexao);
+        // cria comando 
+        using var comando = new MySqlCommand(query, conexao);
+        // add parametros
+        comando.Parameters.AddWithValue("@id", UsuarioAtual.Id);
+        
+        try
+        {
+            //abrir conexao
+            conexao.Open();
+            // executar comando
+            var linhasAfetadas = comando.ExecuteNonQuery();
+            // verificar se o comando foi executado
+            if (linhasAfetadas > 0)
+            {
+                MessageBox.Show("Perfil deletado com sucesso!");
+                Close();
+            }
+            
+
+        }
+        catch (Exception exception)
+        {
+        }
     }
 }
 
