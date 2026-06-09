@@ -30,19 +30,19 @@
         <!-- 2. Formulário de Informações -->
         <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <!-- Campo: Nome -->
-            <TextBlock Text="Nome:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="#718093"/>
+            <TextBlock Text="Nome:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="Black"/>
             <TextBox x:Name="txtNome" Padding="5" Height="30" Margin="0,0,0,15"/>
 
             <!-- Campo: Usuário -->
-            <TextBlock Text="Username:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="#718093"/>
+            <TextBlock Text="Username:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="Black"/>
             <TextBox x:Name="txtUsuario" Padding="5" Height="30" Margin="0,0,0,15"/>
 
             <!-- Campo: E-mail -->
-            <TextBlock Text="E-mail:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="#718093"/>
+            <TextBlock Text="E-mail:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="Black"/>
             <TextBox x:Name="txtEmail" Padding="5" Height="30" Margin="0,0,0,15"/>
 
             <!-- Campo: Senha -->
-            <TextBlock Text="Nova Senha:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="#718093"/>
+            <TextBlock Text="Nova Senha:" Margin="0,0,0,5" FontWeight="SemiBold" Foreground="Black"/>
             <PasswordBox x:Name="txtSenha" Padding="5" Height="30" Margin="0,0,0,20"/>
         </StackPanel>
 
@@ -50,7 +50,7 @@
         <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
             <!-- Botão Salvar / Alterar -->
             <Button x:Name="btnSalvar" Content="Salvar Alterações" Height="40" Margin="0,0,0,10"
-                    Background="#555555" Foreground="White" FontWeight="Bold" BorderThickness="0"
+                    Background="Chartreuse" Foreground="Black" FontWeight="Bold" BorderThickness="0"
                     Click="BtnSalvar_OnClick">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -61,7 +61,7 @@
 
             <!-- Botão Deletar Perfil -->
             <Button x:Name="btnDeletar" Content="Excluir Conta" Height="20" 
-                    Background="Transparent" Foreground="#718093" FontWeight="Bold" BorderThickness="0"
+                    Background="Transparent" Foreground="Black" FontWeight="Bold" BorderThickness="0"
                     Click="BtnDeletar_OnClick">
                 <Button.Resources>
                     <Style TargetType="Border">

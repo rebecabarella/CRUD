@@ -19,7 +19,7 @@
             <Label Content="Senha:" FontWeight="Bold" Margin="0 0 0 2" />
             <PasswordBox x:Name="TxtSenha" Height="25" Margin="0 0 0 10" VerticalAlignment="Center" />
 
-            <Button Content="Cadastrar" Click="BtnCadastrar_OnClick" />
+            <Button Content="Cadastrar" Click="BtnCadastrar_OnClick" Background="Chartreuse"/>
         </StackPanel>
     </Grid>
 </Window>
