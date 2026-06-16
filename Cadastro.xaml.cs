@@ -12,16 +12,17 @@ public partial class Cadastro : Window
 
     private void BtnCadastrar_OnClick(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(TxtNome.Text) || string.IsNullOrWhiteSpace(TxtEmail.Text) ||
-            string.IsNullOrWhiteSpace(TxtUsername.Text) || string.IsNullOrEmpty(TxtSenha.Password))
+        if (string.IsNullOrWhiteSpace(TxtNome.Text) ||
+            string.IsNullOrWhiteSpace(TxtUsername.Text) ||
+            string.IsNullOrWhiteSpace(TxtEmail.Text) ||
+            string.IsNullOrWhiteSpace(TxtSenha.Password))
         {
-            MessageBox.Show("Todos os campos são obrigatórios.", "ERRO!");
+            MessageBox.Show("Todos os campos são obrigatórios.", "Erro!");
             return;
         }
 
         using var conexao = new MySqlConnection(App.StringConexao);
-        const string query =
-            "INSERT INTO usuarios (nome, username, email, senha) VALUES(@nome, @username, @email, @senha)";
+        const string query = "INSERT INTO usuarios(nome, username, email, senha) VALUES(@nome, @username, @email, @senha)";
 
         using var comando = new MySqlCommand(query, conexao);
         comando.Parameters.AddWithValue("@nome", TxtNome.Text);
@@ -29,24 +30,28 @@ public partial class Cadastro : Window
         comando.Parameters.AddWithValue("@email", TxtEmail.Text);
         comando.Parameters.AddWithValue("@senha", TxtSenha.Password);
 
-
         try
         {
             conexao.Open();
-
             var linhasAfetadas = comando.ExecuteNonQuery();
-            if (linhasAfetadas > 0) MessageBox.Show("Cadastro efetuado com sucesso!");
+            if (linhasAfetadas > 0)
+            {
+                MessageBox.Show("Cadastro realizado!");
+            }
         }
         catch (Exception exception)
         {
             if (exception is MySqlException erroSql)
+            {
                 if (erroSql.Number == 1062)
                 {
-                    MessageBox.Show("O email ou o usuário já foram utilizados");
+                    MessageBox.Show("O email ou username já foram utilizados");
                     return;
                 }
-
+            }
+                    
             Console.WriteLine(exception);
+            return;
         }
     }
 }

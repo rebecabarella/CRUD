@@ -12,96 +12,104 @@ public partial class MeuPerfil : Window
     {
         InitializeComponent();
         UsuarioAtual = usuario;
-        txtNome.Text = UsuarioAtual.Nome;
-        txtUsuario.Text = UsuarioAtual.Username;
-        txtEmail.Text = UsuarioAtual.Email;
+        TxtNome.Text = UsuarioAtual.Nome;
+        TxtEmail.Text = UsuarioAtual.Email;
+        TxtUsername.Text = UsuarioAtual.Username;
     }
 
     private void BtnSalvar_OnClick(object sender, RoutedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(txtUsuario.Text) || string.IsNullOrWhiteSpace(txtNome.Text) ||
-            string.IsNullOrWhiteSpace(txtEmail.Text))
+        if (string.IsNullOrWhiteSpace(TxtNome.Text))
         {
-            MessageBox.Show("Campos incompletos!");
+            MessageBox.Show("O campo NOME não pode estar vazio.");
+            TxtNome.Focus();
             return;
         }
 
-        var senhaFoiAlterada = !string.IsNullOrWhiteSpace(txtSenha.Password);
+        if (string.IsNullOrWhiteSpace(TxtEmail.Text))
+        {
+            MessageBox.Show("O campo EMAIL não pode estar vazio.");
+            TxtEmail.Focus();
+            return;
+        }
 
-        UsuarioAtual.Username = txtUsuario.Text;
-        UsuarioAtual.Nome = txtNome.Text;
-        UsuarioAtual.Email = txtEmail.Text;
-        if (senhaFoiAlterada) UsuarioAtual.Senha = txtSenha.Password;
-        
+        if (string.IsNullOrWhiteSpace(TxtUsername.Text))
+        {
+            MessageBox.Show("O campo USERNAME não pode estar vazio.");
+            TxtUsername.Focus();
+            return;
+        }
+
+        var senhaFoiAlterada = !string.IsNullOrWhiteSpace(TxtSenha.Password);
+
+        UsuarioAtual.Username = TxtUsername.Text;
+        UsuarioAtual.Nome = TxtNome.Text;
+        UsuarioAtual.Email = TxtEmail.Text;
+        if (senhaFoiAlterada) UsuarioAtual.Senha = TxtSenha.Password;
 
         using var conexao = new MySqlConnection(App.StringConexao);
-        var query = "UPDATE usuarios SET username= @username, email = @email, nome = @nome ";
+        var query = "UPDATE usuarios SET username = @username, nome = @nome, email = @email";
 
         if (senhaFoiAlterada) query += ", senha = @senha";
 
         query += " WHERE id = @id";
-        
+
         using var comando = new MySqlCommand(query, conexao);
-        
+
         comando.Parameters.AddWithValue("@username", UsuarioAtual.Username);
         comando.Parameters.AddWithValue("@nome", UsuarioAtual.Nome);
         comando.Parameters.AddWithValue("@email", UsuarioAtual.Email);
         comando.Parameters.AddWithValue("@id", UsuarioAtual.Id);
-        
+
         if (senhaFoiAlterada) comando.Parameters.AddWithValue("@senha", UsuarioAtual.Senha);
 
         try
         {
             conexao.Open();
             var linhasAfetadas = comando.ExecuteNonQuery();
-            
-            if (linhasAfetadas > 0)
-                MessageBox.Show("cadastro atualizado com sucesso!");
-            else
-                MessageBox.Show("Erro ao atualizar os dados!");
 
+            if (linhasAfetadas > 0)
+                MessageBox.Show("Cadastro atualizado com sucesso!");
+            else
+                MessageBox.Show("Erro ao atualizar o cadastro!");
         }
         catch (Exception exception)
         {
             MessageBox.Show("Erro de DB.");
         }
-
     }
 
-    private void BtnDeletar_OnClick(object sender, RoutedEventArgs e)
+    private void BtnDeletarPerfil_OnClick(object sender, RoutedEventArgs e)
     {
-        var resultadoMessageBox = MessageBox.Show("Voce tem certeza que deseja excluir o perfil?", "confirmação de exclusão", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        var resultadoMessageBox = MessageBox.Show("Você tem certeza que deseja apagar o seu perfil?", "Confirmação de Exclusão", MessageBoxButton.YesNo, MessageBoxImage.Question);
         
-        if (resultadoMessageBox == MessageBoxResult.No)
-            return;
+        if (resultadoMessageBox == MessageBoxResult.No) return;
         
-        // criar a query
-        var query = "DELETE FROM usuarios WHERE id = @id";
-        //criar conexao
+        // Criar uma query
+        const string query = "DELETE FROM usuarios WHERE id = @id";
+        // Criar a conexao
         using var conexao = new MySqlConnection(App.StringConexao);
-        // cria comando 
+        // Criar o comando
         using var comando = new MySqlCommand(query, conexao);
-        // add parametros
+        // Adicionar os parametros
         comando.Parameters.AddWithValue("@id", UsuarioAtual.Id);
-        
         try
         {
-            //abrir conexao
+            // Abrir conexao
             conexao.Open();
-            // executar comando
+            // Executar o comando
             var linhasAfetadas = comando.ExecuteNonQuery();
-            // verificar se o comando foi executado
+            // Verificar se o comando foi executado
             if (linhasAfetadas > 0)
             {
                 MessageBox.Show("Perfil deletado com sucesso!");
+                // Se ele foi executado, fechar a janela MeuPerfil
                 Close();
             }
-            
-
         }
         catch (Exception exception)
         {
+            Console.WriteLine(exception);
         }
     }
 }
-

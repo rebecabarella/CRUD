@@ -4,58 +4,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         mc:Ignorable="d"
-        Title="Login de usuário" Height="450" Width="800">
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
-        <StackPanel>
+        Title="Login de Usuário"
+        Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Border Background="White"
+                CornerRadius="8"
+                Padding="30"
+                Width="320">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2" Opacity="0.1" />
+            </Border.Effect>
 
-            <!-- Título da Tela -->
-            <TextBlock Text="Bem-vindo"
-                       FontSize="28"
-                       FontWeight="Bold"
-                       Foreground="#2F3640"
-                       HorizontalAlignment="Center"
-                       Margin="0,0,0,10" />
-
-            <!-- Campo de Usuário -->
             <StackPanel>
-                <TextBlock Text="Usuário" Foreground="#718093" Margin="0,0,0,5" FontWeight="SemiBold" />
+                <TextBlock Text="Bem-vindo"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Foreground="#111827"
+                           Margin="0,0,0,20"
+                           HorizontalAlignment="Center" />
+                
+                <TextBlock Text="Usuário"
+                           FontSize="14"
+                           Foreground="#374151"
+                           Margin="0,0,0,5" />
                 <TextBox x:Name="TxtUsuario"
                          Height="35"
-                         Padding="5,0"
+                         Margin="0,0,0,15"
                          VerticalContentAlignment="Center"
-                         FontSize="14" />
-
-                <TextBlock Text="Senha" Foreground="#718093" Margin="0,0,0,5" FontWeight="SemiBold" />
+                         Padding="5,0" />
+                
+                <TextBlock Text="Senha"
+                           FontSize="14"
+                           Foreground="#374151"
+                           Margin="0,0,0,5" />
                 <PasswordBox x:Name="TxtSenha"
                              Height="35"
-                             Padding="5,0"
+                             Margin="0,0,0,25"
                              VerticalContentAlignment="Center"
-                             FontSize="14" />
+                             Padding="5,0" />
+                
+                <Button x:Name="BtnLogin"
+                        Content="Entrar"
+                        Height="40"
+                        Background="#2563EB"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Click="BtnLogin_OnClick">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5" />
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                
+                <Button x:Name="BtnCadastro"
+                        Content="Não tem uma conta? Cadastre-se"
+                        Background="Transparent"
+                        Foreground="#2563EB"
+                        BorderThickness="0"
+                        Margin="0,15,0,0"
+                        Cursor="Hand"
+                        Click="BtnCadastro_OnClick"
+                        >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <TextBlock Text="{TemplateBinding Content}"
+                                                   HorizontalAlignment="Center"
+                                                   TextDecorations="Underline" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
             </StackPanel>
-
-            <!-- Botão de Login -->
-            <Button x:Name="BtnLogin"
-                    Content="Entrar"
-                    Height="40"
-                    Background="#555555"
-                    Foreground="White"
-                    FontSize="16"
-                    FontWeight="Bold"
-                    Cursor="Hand"
-                    Margin="0,10,0,0"
-                    Click="BtnLogin_OnClick" />
-
-            <!-- Botão de Cadastro -->
-            <Button x:Name="BtnCadastrar"
-                    Content="Não tem uma conta? Cadastre-se"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    Foreground="#718093"
-                    Cursor="Hand"
-                    HorizontalAlignment="Center"
-                    Margin="0,5,0,0"
-                    Click="BtnCadastrar_OnClick" />
-
-        </StackPanel>
+        </Border>
     </Grid>
 </Window>

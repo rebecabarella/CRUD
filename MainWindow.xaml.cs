@@ -15,14 +15,14 @@ public partial class MainWindow : Window
     {
         if (string.IsNullOrWhiteSpace(TxtUsuario.Text))
         {
-            MessageBox.Show("Preencha o campo Usuario!");
+            MessageBox.Show("Preencha o campo de usuário!");
             TxtUsuario.Focus();
             return;
         }
-
+        
         if (string.IsNullOrWhiteSpace(TxtSenha.Password))
         {
-            MessageBox.Show("Preencha o campo senha!");
+            MessageBox.Show("Preencha o campo de senha!");
             TxtSenha.Focus();
             return;
         }
@@ -31,42 +31,40 @@ public partial class MainWindow : Window
         const string query = "SELECT * FROM usuarios WHERE username = @username AND senha = @senha";
 
         using var comando = new MySqlCommand(query, conexao);
-        comando.Parameters.AddWithValue("username", TxtUsuario.Text);
+        comando.Parameters.AddWithValue("@username", TxtUsuario.Text);
         comando.Parameters.AddWithValue("@senha", TxtSenha.Password);
-
+                
         try
         {
             conexao.Open();
             using var leitor = comando.ExecuteReader();
             if (!leitor.HasRows)
             {
-                MessageBox.Show("Usuário e/ou senha incorretos!");
+                MessageBox.Show("Usuário e/ou senha estão errados.", "Erro!");
                 return;
             }
 
             while (leitor.Read())
             {
                 var usuarioBanco = new Usuario();
-                
+
                 usuarioBanco.Id = leitor.GetInt32(0);
                 usuarioBanco.Nome = leitor.GetString(1);
                 usuarioBanco.Email = leitor.GetString(2);
                 usuarioBanco.Senha = leitor.GetString(3);
                 usuarioBanco.Username = leitor.GetString(4);
                 
-                
-                
-                new MeuPerfil(usuarioBanco).Show();
-                
+                new Feed(usuarioBanco).Show();
             }
         }
         catch (Exception exception)
         {
             Console.WriteLine(exception);
+            return;
         }
     }
 
-    private void BtnCadastrar_OnClick(object sender, RoutedEventArgs e)
+    private void BtnCadastro_OnClick(object sender, RoutedEventArgs e)
     {
         var janelaCadastro = new Cadastro();
         Hide();
