@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using CRUD.Modelos;
 using MySql.Data.MySqlClient;
 
@@ -8,7 +7,7 @@ namespace CRUD;
 
 public partial class Feed : Window
 {
-    private Usuario _usuario;
+    private readonly Usuario _usuario;
 
     public Feed(Usuario usuario)
     {
@@ -28,7 +27,7 @@ public partial class Feed : Window
 
         using var comando = new MySqlCommand(query, conexao);
         comando.Parameters.AddWithValue("@usuario_id", _usuario.Id);
-        
+
         // Criar um bloco try-catch
         try
         {
@@ -53,7 +52,7 @@ public partial class Feed : Window
                     Conteudo = leitor.GetString("conteudo"),
                     Curtidas = leitor.GetInt32("curtidas"),
                     Postado_em = leitor.GetDateTime("postado_em"),
-                    FoiCurtido =  leitor.GetBoolean("curtido"),
+                    FoiCurtido = leitor.GetBoolean("curtido"),
                     Usuario = new Usuario
                     {
                         Nome = leitor.GetString("nome"),
@@ -93,12 +92,14 @@ public partial class Feed : Window
                 query = "DELETE FROM curtidas_postagens WHERE usuario_id = @usuario AND postagem_id = @postagem";
                 acao = "descurtir";
                 postagem.FoiCurtido = false;
+                postagem.Curtidas--;
             }
             else
             {
                 query = "INSERT INTO curtidas_postagens(usuario_id, postagem_id) VALUES (@usuario, @postagem)";
                 acao = "curtir";
                 postagem.FoiCurtido = true;
+                postagem.Curtidas++;
             }
 
             conexao.Close();

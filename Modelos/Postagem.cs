@@ -1,21 +1,28 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace CRUD.Modelos;
 
 public class Postagem : INotifyPropertyChanged
-    
 {
+    private int _curtidas;
+    private bool _foiCurtido;
     public int Id { get; set; }
     public string Conteudo { get; set; }
-    public int Curtidas { get; set; }
+
+    public int Curtidas
+    {
+        get => _curtidas;
+        set
+        {
+            _curtidas = value;
+            NotificarPropriedadeAlterada();
+        }
+    }
+
     public DateTime Postado_em { get; set; }
     public Usuario Usuario { get; set; }
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private bool _foiCurtido;
-    
+
     public bool FoiCurtido
     {
         get => _foiCurtido;
@@ -23,14 +30,16 @@ public class Postagem : INotifyPropertyChanged
         {
             if (_foiCurtido != value)
             {
-                _foiCurtido = value ;
+                _foiCurtido = value;
                 NotificarPropriedadeAlterada();
             }
         }
     }
 
+    public event PropertyChangedEventHandler? PropertyChanged;
+
     private void NotificarPropriedadeAlterada([CallerMemberName] string namePropriedade = "")
     {
-        PropertyChanged?.Invoke(sender:this, new PropertyChangedEventArgs(namePropriedade));
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(namePropriedade));
     }
 }

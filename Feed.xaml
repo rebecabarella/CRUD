@@ -68,20 +68,21 @@
 
                                             <StackPanel Orientation="Horizontal">
                                                 <Button Content="❤️ Curtir"
-                                                              Height="35"
-                                                              Width="100"
-                                                              HorizontalAlignment="Left"
-                                                              FontWeight="Bold"
-                                                              BorderThickness="0"
-                                                              Cursor="Hand"
-                                                              Click="BtnCurtir_OnClick"
-                                                              Tag="{Binding}">
+                                                        Height="35"
+                                                        Width="100"
+                                                        HorizontalAlignment="Left"
+                                                        FontWeight="Bold"
+                                                        BorderThickness="0"
+                                                        Cursor="Hand"
+                                                        Click="BtnCurtir_OnClick"
+                                                        Tag="{Binding}">
                                                     <Button.Style>
                                                         <Style TargetType="Button">
                                                             <Setter Property="Background" Value="Transparent" />
-                                                            <Setter Property="Foreground" Value="Black"/>
+                                                            <Setter Property="Foreground" Value="Black" />
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding FoiCurtido}" Value="True">
+                                                                <DataTrigger Binding="{Binding FoiCurtido}"
+                                                                             Value="True">
                                                                     <Setter Property="Foreground" Value="Crimson" />
                                                                 </DataTrigger>
                                                             </Style.Triggers>
