@@ -21,7 +21,7 @@
                 <TextBlock Text="Bem-vindo"
                            FontSize="24"
                            FontWeight="Bold"
-                           Foreground="#111827"
+                           Foreground="Black"
                            Margin="0,0,0,20"
                            HorizontalAlignment="Center" />
 
@@ -29,7 +29,7 @@
                            FontSize="14"
                            Foreground="#374151"
                            Margin="0,0,0,5" />
-                <TextBox x:Name="TxtUsuario"
+                <TextBox x:Name="TxtUsuario" 
                          Height="35"
                          Margin="0,0,0,15"
                          VerticalContentAlignment="Center"
@@ -48,11 +48,12 @@
                 <Button x:Name="BtnLogin"
                         Content="Entrar"
                         Height="40"
-                        Background="#2563EB"
+                        Background="DodgerBlue"
                         Foreground="White"
                         FontWeight="Bold"
                         BorderThickness="0"
                         Cursor="Hand"
+                        IsDefault="True"
                         Click="BtnLogin_OnClick">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -64,7 +65,7 @@
                 <Button x:Name="BtnCadastro"
                         Content="Não tem uma conta? Cadastre-se"
                         Background="Transparent"
-                        Foreground="#2563EB"
+                        Foreground="DodgerBlue"
                         BorderThickness="0"
                         Margin="0,15,0,0"
                         Cursor="Hand"

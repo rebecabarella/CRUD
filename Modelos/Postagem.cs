@@ -8,7 +8,7 @@ public class Postagem : INotifyPropertyChanged
     private int _curtidas;
     private bool _foiCurtido;
     public int Id { get; set; }
-    public string Conteudo { get; set; }
+    public string Conteudo { get; set; } = string.Empty;
 
     public int Curtidas
     {
@@ -21,18 +21,16 @@ public class Postagem : INotifyPropertyChanged
     }
 
     public DateTime Postado_em { get; set; }
-    public Usuario Usuario { get; set; }
+    public Usuario Usuario { get; set; } = null!;
 
     public bool FoiCurtido
     {
         get => _foiCurtido;
         set
         {
-            if (_foiCurtido != value)
-            {
-                _foiCurtido = value;
-                NotificarPropriedadeAlterada();
-            }
+            if (_foiCurtido == value) return;
+            _foiCurtido = value;
+            NotificarPropriedadeAlterada();
         }
     }
 
