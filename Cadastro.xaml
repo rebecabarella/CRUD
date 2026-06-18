@@ -69,7 +69,7 @@
                 <Button x:Name="BtnCadastrar"
                         Content="Cadastrar"
                         Height="40"
-                        Background="#2563EB"
+                        Background="Blue"
                         Foreground="White"
                         FontWeight="Bold"
                         BorderThickness="0"
