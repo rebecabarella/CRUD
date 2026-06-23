@@ -50,7 +50,7 @@ public partial class MainWindow : Window
                 var usuarioBanco = new Usuario
                 {
                     Id = leitor.GetInt32("id"),
-                    Nome = leitor.GetString("nome" ),
+                    Nome = leitor.GetString("nome"),
                     Email = leitor.GetString("email"),
                     Username = leitor.GetString("username")
                 };
@@ -61,14 +61,17 @@ public partial class MainWindow : Window
         }
         catch (Exception exception)
         {
-            Console.WriteLine(exception);
+            MessageBox.Show($"Erro: {exception.Message}", "Erro!");
+        }
+        finally
+        {
+            conexao.Close();
         }
     }
 
     private void BtnCadastro_OnClick(object sender, RoutedEventArgs e)
     {
-        var janelaCadastro = new Cadastro();
-        janelaCadastro.Show();
+        new Cadastro().Show();
         Close();
     }
 }

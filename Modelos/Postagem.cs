@@ -7,6 +7,7 @@ public class Postagem : INotifyPropertyChanged
 {
     private int _curtidas;
     private bool _foiCurtido;
+
     public int Id { get; set; }
     public string Conteudo { get; set; } = string.Empty;
 
@@ -20,7 +21,7 @@ public class Postagem : INotifyPropertyChanged
         }
     }
 
-    public DateTime Postado_em { get; set; }
+    public DateTime PostadoEm { get; set; }
     public Usuario Usuario { get; set; } = null!;
 
     public bool FoiCurtido
@@ -36,8 +37,9 @@ public class Postagem : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    private void NotificarPropriedadeAlterada([CallerMemberName] string namePropriedade = "")
+    private void NotificarPropriedadeAlterada([CallerMemberName] string nomePropriedade = "")
     {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(namePropriedade));
+        PropertyChanged?.Invoke(this,
+            new PropertyChangedEventArgs(nomePropriedade));
     }
 }
