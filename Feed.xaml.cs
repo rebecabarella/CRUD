@@ -134,4 +134,44 @@ public partial class Feed : Window
         new MeuPerfil(_usuario).ShowDialog();
         CarregarPosts_QuandoIniciar();
     }
+
+    private void BtnApagarPost_OnClick(object sender, RoutedEventArgs e)
+    {
+        var resultadoConfirmacao = MessageBox.Show("Tem certeza que deseja apagar postagem?",
+            "Confirmar exclusão", MessageBoxButton.YesNo);
+        
+        if (resultadoConfirmacao == MessageBoxResult.No) return;
+
+        var botao = (Button)sender;
+        var postagemId = (int)botao.Tag;
+        
+        using var conexao = new MySqlConnection(App.StringConexao);
+        const string query = "DELETE FROM postagens WHERE id = @postagem_id";
+        using var comando = new MySqlCommand(query, conexao);
+        comando.Parameters.AddWithValue("@postagem_id", postagemId);
+        try
+        {
+         conexao.Open();
+         var linhasAfetadas = comando.ExecuteNonQuery();
+         if (linhasAfetadas < 1) throw new Exception($"Erro ao deletar post!");
+         MessageBox.Show("Postagem apagada com sucesso!");
+         CarregarPosts_QuandoIniciar();
+        }
+        catch (Exception exception)
+        {
+            MessageBox.Show  ($"Erro de DB: {exception.Message}");
+        }
+        finally
+        {
+            conexao.Close();
+        }
+        
+        
+        
+    }
+
+    private void BtnEditarPost_OnClick(object sender, RoutedEventArgs e)
+    {
+        
+    }
 }
