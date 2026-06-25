@@ -24,7 +24,7 @@ public partial class JanelaPostagem : Window
         TbConteudo.Text = postagem.Conteudo;
         _ehEdicao = true;
         Title = "Editar postagem";
-        BtnPostar.Content = "Salvar alterações";
+        BtnPostar.Content = "Salvar alterações"; 
     }
     
     private void TbConteudo_OnTextChanged(object sender, TextChangedEventArgs e)
